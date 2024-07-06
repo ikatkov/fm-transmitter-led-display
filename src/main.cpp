@@ -10,9 +10,8 @@ FmDisplay fmDisplay = FmDisplay(clockPin, dataPin, latchPin);
 
 void applyValue(JSONVar json_value)
 {
-    fmDisplay.sendInitData(MSBFIRST, json_value, 12);
-    // int value[] = {(int)json_value, (int)json_value, (int)json_value, (int)json_value};
-    // fmDisplay.sendRawData(MSBFIRST, value, 12, 4);
+    int value[] = {(int)json_value, (int)json_value, (int)json_value, (int)json_value};
+    fmDisplay.sendRawData(MSBFIRST, value, 12, 4);
 }
 
 void setup()
@@ -20,7 +19,6 @@ void setup()
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(57600); // should be this value for SimpleWebSerial
     delay(100);
-    fmDisplay.start();
     fmDisplay.clear();
 
     int text[] = {_H, _o, _t, _degree};

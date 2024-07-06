@@ -8,7 +8,6 @@ FmDisplay fmDisplay = FmDisplay(clockPin, dataPin, latchPin);
 
 void setup()
 {
-    fmDisplay.start();
     fmDisplay.clear();
 }
 
