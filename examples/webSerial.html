@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>12 buttons</title>
+    <script>var exports = {};</script>
+    <script lang="text/javascript" src="web-serial-dist/cjs/index.js"></script>
+    <style>
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .square-button {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .submit-button {
+            width: 650px;
+            height: 100px;
+            display: inline-block;
+            margin: 50px;
+            text-align: center;
+            vertical-align: middle;
+            background-color: lightgreen;
+        }
+
+        .dec-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="permissionElement">Connect to Serial Port</button>
+    <br><br>
+    <div class="button-container">
+        <!-- Group 1 -->
+        <div class="button-group">
+            <button id="b1" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b2" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b3" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b4" class="square-button" onclick="toggleButton(this)">0</button>
+        </div>
+        <!-- Group 2 -->
+        <div class="button-group">
+            <button id="b5" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b6" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b7" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b8" class="square-button" onclick="toggleButton(this)">0</button>
+        </div>
+        <!-- Group 3 -->
+        <div class="button-group">
+            <button id="b9" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b10" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b11" class="square-button" onclick="toggleButton(this)">0</button>
+            <button id="b12" class="square-button" onclick="toggleButton(this)">0</button>
+        </div>
+    </div>
+
+    <div class="dec-display" id="decDisplay">Dec Value: </div>
+
+    <button class="submit-button" onclick="submitButton(this)">Send</button>
+
+    <script type="text/javascript">
+        let decValue = ""
+
+        function computeValue() {
+            let binaryString = "";
+            for (let i = 1; i <= 12; i++) {
+                binaryString += document.getElementById('b' + i).textContent;
+            }
+
+            decValue = parseInt(binaryString, 2).toString(10).toUpperCase();
+            document.getElementById('decDisplay').textContent = "Dec Value: " + decValue;
+        }
+
+        function toggleButton(button) {
+            button.textContent = button.textContent === "0" ? "1" : "0";
+            computeValue();
+        }
+
+        function submitButton(button) {
+            computeValue();
+            connection.send("value", decValue);
+            console.log("Command sent= " + decValue);
+        }
+
+        const connection = setupSerialConnection({ "logOutgoingSerialData": true });
+        document.querySelector('#permissionElement').addEventListener('click', connection.startConnection);
+
+    </script>
+
+
+
+</body>
+
+</html>

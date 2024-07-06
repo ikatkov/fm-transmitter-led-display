@@ -1,0 +1,76 @@
+
+Jul 5, 2024
+===================
+
+# Todo
+write code to flip a single bit, observe the effect on segments.
+Use MSB mode.
+
+
+
+
+
+# Preliminary results
+
+Attempt to decode using MSB first
+
+
+each digit has 12 bits.
+full transaction looks like
+
+
+ command        dig4               dig3             dig2                  dig 1
+1010 1010   0000 0000 0000     0111 0111 0100     0110 0111 0100       0000 0000 0000
+
+
+ bc.  gda  f e
+x110 x111 x1x1
+
+x = not used
+
+there is decimal point ONLY for digit 3 and 4
+decimal point for digit 4 == "Mhz"
+
+
+
+
+
+
+
+
+===========
+Raw notes
+===========
+
+
+AA000774674000 - 99 dot, no last digit,  no mhz
+
+ command        dig4               dig3             dig2                  dig 1
+1010 1010   0000 0000 0000     0111 0111 0100     0110 0111 0100       0000 0000 0000
+
+digit segments
+
+   .    a
+0000 0001 0000
+
+
+ bc. 
+0111 0000 0000 
+
+ bc.    a
+0111 0001 0000
+
+ bc.   da
+0111 0011 0000
+
+ bc.  gda
+0111 0100 0000
+
+ bc.  gda
+0111 0010 0000
+
+ bc.  gda  f 
+0110 0111 0100
+
+ bc.  gda  f e
+0110 0111 0101
