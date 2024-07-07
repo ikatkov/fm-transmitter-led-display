@@ -55,5 +55,12 @@ const int segment_e =  0b000000000010;
 
 See the [basic example](examples/basic.cpp)
 
-To display arbitrary symbol assemble an `int` from segments and call `display_symbols(...)`
+To display an arbitrary symbol - assemble an `int` from segments and call `display_symbols(...)`.
 
+Take a look at a [neat web interface](examples/webSerial.html) and [matching MCU code](examples/webSerial.cpp).  
+See https://wicg.github.io/serial/
+It only works in Chrome and Edge, https://caniuse.com/web-serial but it's worth it.
+
+# Reverse engineering notes
+
+To guess bit's meaning - invest time in a tool that makes trial-n-errors visual, it took me a day to make webSerial work and then 3 minutes to decode commands.
