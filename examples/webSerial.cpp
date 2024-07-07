@@ -1,12 +1,12 @@
 #include "SimpleWebSerial.h"
 #include "FmDisplay.h"
 
-const int latchPin = 12;
+const int csPin = 12;
 const int clockPin = 11;
 const int dataPin = 10;
 
 SimpleWebSerial WebSerial;
-FmDisplay fmDisplay = FmDisplay(clockPin, dataPin, latchPin);
+FmDisplay fmDisplay = FmDisplay(clockPin, dataPin, csPin);
 
 void applyValue(JSONVar json_value)
 {
