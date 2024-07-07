@@ -16,7 +16,6 @@ void applyValue(JSONVar json_value)
 
 void setup()
 {
-    pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(57600); // should be this value for SimpleWebSerial
     delay(100);
     fmDisplay.start();

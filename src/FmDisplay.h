@@ -6,11 +6,13 @@ class FmDisplay
 {
 public:
     FmDisplay(uint8_t clk, uint8_t dio, uint8_t cs);
+    void start();
     void clear();
     void display_int(int value);
     void display_symbols(int data[]);
     void display_show_dot(bool value);
     void sendRawData(uint8_t bitOrder, int *data, uint8_t word_length, uint8_t length);
+    void sendInitData(uint8_t bitOrder, int val, uint8_t word_length);
 
 private:
     uint16_t lastData[4];

@@ -101,6 +101,36 @@ void FmDisplay::display_show_dot(bool value)
         point_data = 0;
 }
 
+void FmDisplay::start()
+{
+    sendInitData(MSBFIRST, 0x803, 12);
+    sendInitData(MSBFIRST, 0x807, 12);
+    sendInitData(MSBFIRST, 0x848, 12);
+}
+
+void FmDisplay::sendInitData(uint8_t bitOrder, int val, uint8_t word_length)
+{
+    digitalWrite(csPin, LOW);
+
+    uint8_t i;
+    for (i = 0; i < word_length; i++)
+    {
+        if (bitOrder == LSBFIRST)
+        {
+            digitalWrite(dataPin, !!(val & (1 << i)));
+        }
+        else
+            digitalWrite(dataPin, !!(val & (1 << (word_length - 1 - i))));
+
+        digitalWrite(clkPin, HIGH);
+        digitalWrite(clkPin, LOW);
+    }
+
+    digitalWrite(dataPin, LOW);
+    digitalWrite(clkPin, LOW);
+    digitalWrite(csPin, HIGH);
+}
+
 void FmDisplay::sendRawData(uint8_t bitOrder, int *data, uint8_t word_length, uint8_t length)
 {
     digitalWrite(csPin, LOW);
